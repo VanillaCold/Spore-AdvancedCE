@@ -1,0 +1,9 @@
+keys palettePalettePages
+	creature_editor_palette_pages~!ce_page_detail
+	creature_editor_palette_pages~!ce_page_grasper
+	creature_editor_palette_pages~!ce_page_move
+	creature_editor_palette_pages~!ce_page_sense
+	creature_editor_palette_pages~!ce_page_limb
+	creature_editor_palette_pages~!ce_page_weapon
+	creature_editor_palette_pages~!ce_page_mouth
+end

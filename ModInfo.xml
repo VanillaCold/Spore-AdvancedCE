@@ -1,0 +1,10 @@
+<mod displayName="Advanced CE" unique="AdvancedCEChocIce75" description="Advanced CE adds the building editor's part clipping to the creature editor and outfitters, among some other smaller features." installerSystemVersion="1.0.1.1" hasCustomInstaller="true" dllsBuild="2.5.20">
+	<remove game="GalacticAdventures">!!!!!!!!!!!AdvancedCE.package</remove>
+	<remove game="GalacticAdventures">!!!!!!!!!!!AdvancedCE_Vanilla.package</remove>
+	<remove game="GalacticAdventures">!!!!!!!!!!!AdvancedCE-GM.package</remove>
+	<remove game="GalacticAdventures">!!!!!!!!!!!AdvancedCE_Vanilla-GM.package</remove>
+
+	<prerequisite game="GalacticAdventures">Chocice75_AdvCE.package</prerequisite>
+	<component unique="NoSnap" displayName="Suppress Snapping" description="Decreases the distance from the center required before parts snap to the center of the creature, making the snapping less annoying." game="GalacticAdventures" defaultChecked="true">Chocice75_AdvCE_NoSnap.package</component>
+	<component unique="EvoOutfitter" displayName="Evo-Outfitter" description="Adds parts from the Creature Editor into all outfitters." game="GalacticAdventures" defaultChecked="true">Chocice75_AdvCE_NoSnap.package</component>
+</mod>

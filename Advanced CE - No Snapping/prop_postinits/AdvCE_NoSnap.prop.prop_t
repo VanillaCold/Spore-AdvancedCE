@@ -1,0 +1,10 @@
+string8s postinitList
+#this list is a list of files to postinit.
+#the first value is a key to the file your postiniting
+#the second value is a key to the file containing the postinit data
+	"TemplateRigblock AdvCEKey"
+	"MaskTemplate AdvCEKey"
+end
+key TemplateRigblock CreatureEditorTemplates!creatureRigblockTemplate
+key MaskTemplate OutfitEditorTemplates~!0x206EC8C7
+key AdvCEKey AdvancedCE!RigblockOverride

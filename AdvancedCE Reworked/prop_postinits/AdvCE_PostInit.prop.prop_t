@@ -1,0 +1,12 @@
+string8s postinitList
+#this list is a list of files to postinit.
+#the first value is a key to the file your postiniting
+#the second value is a key to the file containing the postinit data
+	"CreatureKey AdvCEKey"
+	"TribalSetupKey AdvCETribalKey"
+	#"TribalCSAKey AdvCETribalKey"
+end
+key CreatureKey editor_setup~!CreatureEditorSetup
+key TribalSetupKey editor_setup~!TribalAccessoriesEditorSetup
+key AdvCEKey AdvancedCE!CEManipulators
+key AdvCETribalKey AdvancedCE!TEManipulators
