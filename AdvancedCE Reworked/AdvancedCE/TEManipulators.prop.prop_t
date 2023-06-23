@@ -12,5 +12,6 @@ keys editorEnabledManipulators
 	cSPEditorManipulationRotationHandle
 	cSPEditorManipulationSpineScaling
 	cSPEditorManipulationCreatureTest
+	cEditorManipulator_AdvancedCE
 end
 bool editorOnlyEditFromPalette false

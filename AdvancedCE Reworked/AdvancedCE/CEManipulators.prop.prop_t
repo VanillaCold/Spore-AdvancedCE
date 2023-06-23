@@ -11,4 +11,5 @@ keys editorEnabledManipulators
 	cSPEditorManipulationDeformHandle
 	cSPEditorManipulationRotationHandle
 	cSPEditorManipulationSpineScaling
+	cEditorManipulator_AdvancedCE
 end
