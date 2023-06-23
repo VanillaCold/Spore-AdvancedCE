@@ -5,6 +5,6 @@
 	<remove game="GalacticAdventures">!!!!!!!!!!!AdvancedCE_Vanilla-GM.package</remove>
 
 	<prerequisite game="GalacticAdventures">Chocice75_AdvCE.package</prerequisite>
-	<component unique="NoSnap" displayName="Suppress Snapping" description="Decreases the distance from the center required before parts snap to the center of the creature, making the snapping less annoying." game="GalacticAdventures" defaultChecked="true">Chocice75_AdvCE_NoSnap.package</component>
-	<component unique="EvoOutfitter" displayName="Evo-Outfitter" description="Adds parts from the Creature Editor into all outfitters." game="GalacticAdventures" defaultChecked="true">Chocice75_AdvCE_NoSnap.package</component>
+    	<component unique="NoSnap" displayName="Suppress Snapping" description="Decreases the distance from the center required before parts snap to the center of the creature, making the snapping less annoying." game="GalacticAdventures" defaultChecked="true">Chocice75_AdvCE_NoSnap.package</component>
+    	<component unique="EvoOutfitter" displayName="Evo-Outfitter" description="Adds parts from the Creature Editor into all outfitters." game="GalacticAdventures" defaultChecked="true">Chocice75_AdvCE-EvoOutfitter.package</component>
 </mod>
