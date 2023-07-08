@@ -26,6 +26,10 @@ member_detour(Editor_EditHistoryDetour, Editors::cEditor, void(bool, Editors::Ed
 				if (!part->mBooleanAttributes[Editors::kEditorRigblockModelIsVertebra] && !part->mBooleanAttributes[Editors::kEditorRigblockModelUseSkin] && !part->mpParent)
 				{
 					part->mpParent = Editor.GetEditorModel()->mRigblocks[0];
+					if (part->mBooleanAttributes[Editors::kEditorRigblockModelActsLikeGrasper] || part->mBooleanAttributes[Editors::kEditorRigblockModelActsLikeFoot])
+					{
+						HintManager.ShowHint(id("advce-corruptlimb"));
+					}
 				}
 			}
 		}
