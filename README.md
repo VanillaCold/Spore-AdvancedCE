@@ -7,3 +7,6 @@ To use this mod's added functions, simply hold down Shift or Control when a part
 # Installation
 Download the latest release from the Releases page, and install it using the Spore ModAPI Easy Installer.
 
+# Translation Credits
+Polish translation by Auntie Owl  
+Finnish translation by Liskomato
