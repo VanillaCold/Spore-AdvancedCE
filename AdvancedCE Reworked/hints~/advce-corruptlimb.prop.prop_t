@@ -1,5 +1,5 @@
 key parent HintTemplates!EDI-TemplateError
 bool hintAlwaysShow true
 texts hintText
-	"The creation's limb parts are now invalid; it will not be sharable."
+	(AdvancedCEErrors!0x0) "The creation's limb parts are now invalid; it will not be sharable. (PLACEHOLDER)"
 end
