@@ -9,6 +9,6 @@ Download the latest release from the Releases page, and install it using the Spo
 
 # Translation Credits
 Polish translation by Auntie Owl  
-Finnish translation by Liskomato
-Japanese translation by Allison Ghost
-Russian translation by 0KepOnline
+Finnish translation by Liskomato  
+Japanese translation by Allison Ghost  
+Russian translation by 0KepOnline  
