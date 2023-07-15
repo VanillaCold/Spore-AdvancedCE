@@ -1,0 +1,8 @@
+string8s replacementList
+	"float 0x8FFC9E66 SnapDelta"
+	"bool 0xDAFBE434 centerSnap"
+	"bool 0x0213A120 parentSnap"
+end
+float SnapDelta 0.5
+bool centerSnap false
+bool parentSnap false

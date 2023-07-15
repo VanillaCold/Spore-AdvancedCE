@@ -4,7 +4,7 @@ string8s postinitList
 #the second value is a key to the file containing the postinit data
 	"CreatureKey AdvCEKey"
 	"TribalSetupKey AdvCETribalKey"
-	#"TribalCSAKey AdvCETribalKey"
+	"TribalCSAKey AdvCETribalKey"
 end
 key CreatureKey editor_setup~!CreatureEditorSetup
 key TribalSetupKey editor_setup~!TribalAccessoriesEditorSetup
