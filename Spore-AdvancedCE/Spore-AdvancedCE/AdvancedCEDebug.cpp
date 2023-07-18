@@ -43,6 +43,31 @@ void AdvancedCEDebug::ParseLine(const ArgScript::Line& line)
 	}*/
 }
 
+EditorRigblockPtr AdvancedCEDebug::GetClosestPart(Editors::EditorRigblock* part)
+{
+	PropertyListPtr propList;
+
+	if (PropManager.GetPropertyList(id("ClosestPartParents"), id("AdvancedCE"), propList))
+	{
+		EditorRigblockPtr closest = Editor.GetEditorModel()->mRigblocks[0];
+		float closestDistance = 99999999999;
+		Vector3 position = part->mPosition;
+		for each (EditorRigblockPtr part2 in Editor.GetEditorModel()->mRigblocks)
+		{
+			float dist = (part2->mPosition - position).Length() / (part2->mModelScale);
+			if (dist < closestDistance && part != part2.get() && part2->mpParent != part)
+			{
+				closest = part2;
+				closestDistance = dist;
+			}
+
+		}
+		part->field_138 = closest->mPosition - position;
+		return closest;
+	}
+	return Editor.GetEditorModel()->mRigblocks[0];
+}
+
 const char* AdvancedCEDebug::GetDescription(ArgScript::DescriptionMode mode) const
 {
 	if (mode == ArgScript::DescriptionMode::Basic) {
