@@ -3,6 +3,6 @@ string8s replacementList
 	"bool 0xDAFBE434 centerSnap"
 	"bool 0x0213A120 parentSnap"
 end
-float SnapDelta 0.5
+float SnapDelta 0.0006
 bool centerSnap false
 bool parentSnap false
