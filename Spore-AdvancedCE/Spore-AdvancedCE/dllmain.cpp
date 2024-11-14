@@ -11,6 +11,14 @@ void Initialize()
 	//Editor.CommitEditHistory()
 }
 
+bool PartCanReparent(EditorRigblockPtr part) {
+	return (!part->mBooleanAttributes[Editors::kEditorRigblockModelIsVertebra] && !part->mBooleanAttributes[Editors::kEditorRigblockModelUseSkin]
+		&& !part->mBooleanAttributes[Editors::kEditorRigblockModelCanBeParentless]
+		&& !part->mpParent);
+}
+
+// If part loses its parent, find the next closest part to attach to.
+// TODO: eventually make this try to reparent to the previous parent.
 member_detour(Editor_EditHistoryDetour, Editors::cEditor, void(bool, Editors::EditorStateEditHistory*)) {
 	void detoured(bool arg1, Editors::EditorStateEditHistory * pStateHistory){
 		auto it = eastl::find(this->mEnabledManipulators.begin(), this->mEnabledManipulators.end(), id("cEditorManipulator_AdvancedCE"));
@@ -18,7 +26,7 @@ member_detour(Editor_EditHistoryDetour, Editors::cEditor, void(bool, Editors::Ed
 		{
 			for each (EditorRigblockPtr part in Editor.GetEditorModel()->mRigblocks)
 			{
-				if (!part->mBooleanAttributes[Editors::kEditorRigblockModelIsVertebra] && !part->mBooleanAttributes[Editors::kEditorRigblockModelUseSkin] && !part->mpParent)
+				if (PartCanReparent(part))
 				{
 					part->mpParent = AdvancedCEDebug::GetClosestPart(part.get());//Editor.GetEditorModel()->mRigblocks[0];
 					if (part->mBooleanAttributes[Editors::kEditorRigblockModelActsLikeGrasper] || part->mBooleanAttributes[Editors::kEditorRigblockModelActsLikeFoot])

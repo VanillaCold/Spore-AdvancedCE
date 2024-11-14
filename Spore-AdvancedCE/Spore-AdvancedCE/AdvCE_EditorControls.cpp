@@ -83,10 +83,6 @@ void AdvCE_EditorControls::SetAdvCEManips(bool state) {
 
 // exclude things that match this description, because they like to crash.
 bool AdvCE_EditorControls::IsRigblockChassis(EditorRigblockPtr part) const {
-	//if (part->mModelRigBlockType.instanceID == id("chassis")) {
-	//	return true;
-	//}
-	//return false;
 	if (!part) { return false; }
 	return part->mBooleanAttributes[kEditorRigblockModelPreferToBeOnPlaneOfSymmetry];
 }
@@ -134,13 +130,9 @@ bool AdvCE_EditorControls::HandleUIMessage(IWindow* window, const Message& messa
 				if ((mbCtrlHeld && mbShiftHeld) || mbCtrlHeld == mbShiftHeld) {
 					SetAdvCEManips(false);
 				}
-				else if (!IsRigblockChassis(editor->mpSelectedPart) || IsRigblockChassis(editor->mpActivePart)){
+				else {
 					SetAdvCEManips(true);
 				}
-			}
-			
-			if (mbShiftHeld && (IsRigblockChassis(editor->mpSelectedPart) || IsRigblockChassis(editor->mpActivePart))) {
-				SetAdvCEManips(false);
 			}
 
 			
