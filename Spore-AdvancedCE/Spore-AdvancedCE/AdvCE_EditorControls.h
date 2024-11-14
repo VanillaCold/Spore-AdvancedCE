@@ -24,6 +24,7 @@ public:
 	
 	bool IsVehicleEditor() const;
 	void SetAdvCEManips(bool state);
+	bool IsRigblockChassis(EditorRigblockPtr par) const;
 
 	int GetEventFlags() const override;
 	// This is the function you have to implement, called when a window you added this winproc to received an event

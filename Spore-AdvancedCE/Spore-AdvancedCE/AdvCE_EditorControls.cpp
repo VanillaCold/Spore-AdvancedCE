@@ -81,7 +81,15 @@ void AdvCE_EditorControls::SetAdvCEManips(bool state) {
 	}
 }
 
-
+// exclude things that match this description, because they like to crash.
+bool AdvCE_EditorControls::IsRigblockChassis(EditorRigblockPtr part) const {
+	//if (part->mModelRigBlockType.instanceID == id("chassis")) {
+	//	return true;
+	//}
+	//return false;
+	if (!part) { return false; }
+	return part->mBooleanAttributes[kEditorRigblockModelPreferToBeOnPlaneOfSymmetry];
+}
 
 int AdvCE_EditorControls::GetEventFlags() const
 {
@@ -93,9 +101,10 @@ bool AdvCE_EditorControls::HandleUIMessage(IWindow* window, const Message& messa
 	if (GameModeManager.GetActiveModeID() == kEditorMode && IsVehicleEditor()) {
 
 		// Failed attempt at remapping moving the entire vehicle to Shift+Ctrl.
-		// Technically works but moving chassis causes some sort of recursive crash i cant fix.
+		// Moving chassis with Shift causes some sort of recursive crash i cant fix, so...
+		// TODO: disable the advanced CE manipulators when a chassis type rigblock is selected
 
-		/*
+		
 		// Did the user press the CTRL or SHIFT keys in a vehicle editor? 
 		if (IsVehicleEditor()) {
 			// Pressed or Unpressed CTRL
@@ -117,23 +126,28 @@ bool AdvCE_EditorControls::HandleUIMessage(IWindow* window, const Message& messa
 				}
 			}
 
-
+			
+			auto editor = GetEditor();
 			if (message.IsType(kMsgKeyDown) || message.IsType(kMsgKeyUp)) {
 				// Player is trying to move the entire vehicle.
 				// This has been remapped to ctrl + shift
 				if ((mbCtrlHeld && mbShiftHeld) || mbCtrlHeld == mbShiftHeld) {
 					SetAdvCEManips(false);
 				}
-				else {
+				else if (!IsRigblockChassis(editor->mpSelectedPart) || IsRigblockChassis(editor->mpActivePart)){
 					SetAdvCEManips(true);
 				}
 			}
+			
+			if (mbShiftHeld && (IsRigblockChassis(editor->mpSelectedPart) || IsRigblockChassis(editor->mpActivePart))) {
+				SetAdvCEManips(false);
+			}
 
 			
-		}*/
+		}
 
-		
-		// Simple method, requires players to hold down Ctrl in order to use advanced CE in vehicle editors, even if using shift.
+		/*
+		// Legacy Simple method, requires players to hold down Ctrl in order to use advanced CE in vehicle editors, even if using shift.
 		if (message.Key.vkey == VK_CONTROL && IsVehicleEditor()) {
 			// key down
 			if (message.IsType(kMsgKeyDown) && !mbCtrlHeld) {
@@ -146,7 +160,7 @@ bool AdvCE_EditorControls::HandleUIMessage(IWindow* window, const Message& messa
 				mbCtrlHeld = false;
 				SetAdvCEManips(false);
 			}
-		}
+		}*/
 		// Outside the editor
 		else {
 			// make sure to turn off Ctrl if it is unpressed even outside the editor.
