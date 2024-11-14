@@ -50,7 +50,7 @@ EditorRigblockPtr AdvancedCEDebug::GetClosestPart(Editors::EditorRigblock* part)
 	if (PropManager.GetPropertyList(id("ClosestPartParents"), id("AdvancedCE"), propList))
 	{
 		EditorRigblockPtr closest = Editor.GetEditorModel()->mRigblocks[0];
-		float closestDistance = 99999999999;
+		float closestDistance = 99999999999.0f;
 		Vector3 position = part->mPosition;
 		for each (EditorRigblockPtr part2 in Editor.GetEditorModel()->mRigblocks)
 		{

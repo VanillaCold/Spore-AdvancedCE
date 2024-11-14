@@ -2,6 +2,7 @@
 #include "stdafx.h"
 #include <Spore\Editors\EditorRigblock.h>
 #include "AdvancedCEDebug.h"
+#include "AdvCE_EditorControls.h"
 
 void Initialize()
 {
@@ -13,6 +14,7 @@ void Initialize()
 	//  - Add new space tools
 	//  - Change materials
 	CheatManager.AddCheat("AdvCEDebug", new AdvancedCEDebug());
+	AdvCE_EditorControls* editorControls = new(AdvCE_EditorControls);
 	//Editor.CommitEditHistory()
 }
 
