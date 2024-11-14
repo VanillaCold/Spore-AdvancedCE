@@ -140,27 +140,11 @@ bool AdvCE_EditorControls::HandleUIMessage(IWindow* window, const Message& messa
 				mbCtrlHeld = true;
 				SetAdvCEManips(true);
 
-				auto editor = GetEditor();
-				// programmatically suppress snapping on all rigblocks
-				if (editor->GetEditorModel()) {
-					for (auto rigblock : editor->GetEditorModel()->mRigblocks) {
-						rigblock->mModelSymmetrySnapDelta *= 0.001;
-					}
-				}
-
 			}
 			// key up
 			else if (message.IsType(kMsgKeyUp) && mbCtrlHeld) {
 				mbCtrlHeld = false;
 				SetAdvCEManips(false);
-
-				auto editor = GetEditor();
-				// programmatically re-enable snapping on all rigblocks
-				if (editor->GetEditorModel()) {
-					for (auto rigblock : editor->GetEditorModel()->mRigblocks) {
-						rigblock->mModelSymmetrySnapDelta /= 0.001;
-					}
-				}
 			}
 		}
 		// Outside the editor
