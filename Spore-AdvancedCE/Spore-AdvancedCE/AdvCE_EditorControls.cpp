@@ -36,6 +36,8 @@ void* AdvCE_EditorControls::Cast(uint32_t type) const
 bool AdvCE_EditorControls::IsVehicleEditor() const {
 	auto editor = GetEditor();
 	if (!editor || editor->mModelTypes.empty()) return false;
+	if (!editor->IsMode(Editors::Mode::BuildMode)) return false;
+
 	switch (editor->mModelTypes[0]) {
 		case kVehicleHarvester:
 		case kVehicleMilitaryLand:

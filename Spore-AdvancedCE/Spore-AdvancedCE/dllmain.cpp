@@ -6,13 +6,6 @@
 
 void Initialize()
 {
-	// This method is executed when the game starts, before the user interface is shown
-	// Here you can do things such as:
-	//  - Add new cheats
-	//  - Add new simulator classes
-	//  - Add new game modes
-	//  - Add new space tools
-	//  - Change materials
 	CheatManager.AddCheat("AdvCEDebug", new AdvancedCEDebug());
 	AdvCE_EditorControls* editorControls = new(AdvCE_EditorControls);
 	//Editor.CommitEditHistory()
@@ -47,8 +40,6 @@ void Dispose()
 void AttachDetours()
 {
 	Editor_EditHistoryDetour::attach(GetAddress(Editors::cEditor, CommitEditHistory));
-	// Call the attach() method on any detours you want to add
-	// For example: cViewer_SetRenderType_detour::attach(GetAddress(cViewer, SetRenderType));
 }
 
 
