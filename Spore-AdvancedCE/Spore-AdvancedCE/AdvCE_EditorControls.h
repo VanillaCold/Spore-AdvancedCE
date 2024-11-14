@@ -22,6 +22,9 @@ public:
 	int Release() override;
 	void* Cast(uint32_t type) const override;
 	
+	EditorRigblockPtr mpPrevParent;
+
+	cEditor* IsInEditor() const;
 	bool IsVehicleEditor() const;
 	void SetAdvCEManips(bool state);
 	bool IsRigblockChassis(EditorRigblockPtr par) const;

@@ -43,7 +43,42 @@ void AdvancedCEDebug::ParseLine(const ArgScript::Line& line)
 	}*/
 }
 
-EditorRigblockPtr AdvancedCEDebug::GetClosestPart(Editors::EditorRigblock* part)
+bool AdvancedCEDebug::PartCanReparent(EditorRigblockPtr part) {
+
+	if (!part->mBooleanAttributes[Editors::kEditorRigblockModelIsVertebra] && !part->mBooleanAttributes[Editors::kEditorRigblockModelUseSkin]
+		&& !part->mpParent) {
+		if (part->mBooleanAttributes[Editors::kEditorRigblockModelCanBeParentless]) {
+			return true;
+		}
+	}
+	return false;
+}
+
+
+
+EditorRigblockPtr AdvancedCEDebug::GetSymmetricPart(EditorRigblockPtr part)
+{
+	// Find the main rigblock index
+	auto& rigblocks = Editor.GetEditorModel()->mRigblocks;
+	auto it = eastl::find(rigblocks.begin(), rigblocks.end(), part);
+	if (it == rigblocks.end()) {
+		// Not found
+		return nullptr;
+	}
+	int rigblockIndex = eastl::distance(rigblocks.begin(), it);
+
+	// Use the rigblock index to get the symmetric block index and rigblock
+	if (Editor.GetSkin() && Editor.GetSkin()->GetMesh() && Editor.GetSkin()->GetMesh()->mpCreatureData) {
+		auto blockdata = Editor.GetSkin()->GetMesh()->mpCreatureData->mRigblocks[rigblockIndex];
+		auto rigblockSymmIndex = blockdata.mSymmetricIndex;
+
+		return rigblocks[rigblockSymmIndex];
+	}
+	
+	return nullptr;
+}
+
+EditorRigblockPtr AdvancedCEDebug::GetClosestPart(EditorRigblockPtr part)
 {
 	PropertyListPtr propList;
 

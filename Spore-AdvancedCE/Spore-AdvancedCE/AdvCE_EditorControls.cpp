@@ -32,11 +32,19 @@ void* AdvCE_EditorControls::Cast(uint32_t type) const
 	return nullptr;
 }
 
+cEditor* AdvCE_EditorControls::IsInEditor() const {
+	if (App::IGameModeManager::Get() && GameModeManager.GetActiveModeID() == kEditorMode) {
+		auto editor = GetEditor();
+		if (!editor || editor->mModelTypes.empty()) return nullptr;
+		if (!editor->IsMode(Editors::Mode::BuildMode)) return nullptr;
+		return editor;
+	}
+	return nullptr;
+}
 
 bool AdvCE_EditorControls::IsVehicleEditor() const {
+	//if (!IsInEditor()) { return false; }
 	auto editor = GetEditor();
-	if (!editor || editor->mModelTypes.empty()) return false;
-	if (!editor->IsMode(Editors::Mode::BuildMode)) return false;
 
 	switch (editor->mModelTypes[0]) {
 		case kVehicleHarvester:
@@ -94,14 +102,22 @@ int AdvCE_EditorControls::GetEventFlags() const
 
 bool AdvCE_EditorControls::HandleUIMessage(IWindow* window, const Message& message)
 {
-	if (GameModeManager.GetActiveModeID() == kEditorMode && IsVehicleEditor()) {
+	cEditor* editor = IsInEditor();
+	// In the editor
+	if (editor) {
 
-		// Failed attempt at remapping moving the entire vehicle to Shift+Ctrl.
-		// Moving chassis with Shift causes some sort of recursive crash i cant fix, so...
-		// TODO: disable the advanced CE manipulators when a chassis type rigblock is selected
+		// Store the part's previous parent.
+		if (message.IsType(kMsgMouseDown) && message.Mouse.IsLeftButton()) {
+			if (editor->mpActivePart && editor->mpActivePart->mpParent) {
+				mpPrevParent = editor->mpActivePart->mpParent;
+			}
+			else {
+				mpPrevParent = nullptr;
+			}
+		}
 
-		
-		// Did the user press the CTRL or SHIFT keys in a vehicle editor? 
+		// Allow Shift and Ctrl to use  Advanced CE movement,
+		// and Remap moving the entire vehicle to Shift+Ctrl.
 		if (IsVehicleEditor()) {
 			// Pressed or Unpressed CTRL
 			if (message.Key.vkey == VK_CONTROL) {
@@ -122,8 +138,8 @@ bool AdvCE_EditorControls::HandleUIMessage(IWindow* window, const Message& messa
 				}
 			}
 
-			
-			auto editor = GetEditor();
+
+
 			if (message.IsType(kMsgKeyDown) || message.IsType(kMsgKeyUp)) {
 				// Player is trying to move the entire vehicle.
 				// This has been remapped to ctrl + shift
@@ -135,34 +151,16 @@ bool AdvCE_EditorControls::HandleUIMessage(IWindow* window, const Message& messa
 				}
 			}
 
-			
+
 		}
-
-		/*
-		// Legacy Simple method, requires players to hold down Ctrl in order to use advanced CE in vehicle editors, even if using shift.
-		if (message.Key.vkey == VK_CONTROL && IsVehicleEditor()) {
-			// key down
-			if (message.IsType(kMsgKeyDown) && !mbCtrlHeld) {
-				mbCtrlHeld = true;
-				SetAdvCEManips(true);
-
-			}
-			// key up
-			else if (message.IsType(kMsgKeyUp) && mbCtrlHeld) {
-				mbCtrlHeld = false;
-				SetAdvCEManips(false);
-			}
-		}*/
-		// Outside the editor
-		else {
-			// make sure to turn off Ctrl if it is unpressed even outside the editor.
-			if (mbCtrlHeld && message.IsType(kMsgKeyUp) && (message.Key.vkey == VK_CONTROL || message.Key.vkey == VK_SHIFT)) {
-				mbCtrlHeld = false;
-				mbShiftHeld = false;
-			}
+	}
+	// Outside the editor
+	else {
+		// make sure to turn off Ctrl if it is unpressed even outside the editor.
+		if (mbCtrlHeld && message.IsType(kMsgKeyUp) && (message.Key.vkey == VK_CONTROL || message.Key.vkey == VK_SHIFT)) {
+			mbCtrlHeld = false;
+			mbShiftHeld = false;
 		}
-
-
 	}
 	return false;
 }
