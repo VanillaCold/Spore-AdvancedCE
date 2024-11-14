@@ -43,7 +43,7 @@ void AdvancedCEDebug::ParseLine(const ArgScript::Line& line)
 	}*/
 }
 
-bool AdvancedCEDebug::PartCanReparent(EditorRigblockPtr part) {
+bool AdvancedCEDebug::PartCanReparent(Editors::EditorRigblock* part) {
 
 	if (!part->mBooleanAttributes[Editors::kEditorRigblockModelIsVertebra] && !part->mBooleanAttributes[Editors::kEditorRigblockModelUseSkin]
 		&& !part->mpParent) {
@@ -56,7 +56,7 @@ bool AdvancedCEDebug::PartCanReparent(EditorRigblockPtr part) {
 
 
 
-EditorRigblockPtr AdvancedCEDebug::GetSymmetricPart(EditorRigblockPtr part)
+EditorRigblockPtr AdvancedCEDebug::GetSymmetricPart(Editors::EditorRigblock* part)
 {
 	// Find the main rigblock index
 	auto& rigblocks = Editor.GetEditorModel()->mRigblocks;
@@ -78,7 +78,7 @@ EditorRigblockPtr AdvancedCEDebug::GetSymmetricPart(EditorRigblockPtr part)
 	return nullptr;
 }
 
-EditorRigblockPtr AdvancedCEDebug::GetClosestPart(EditorRigblockPtr part)
+EditorRigblockPtr AdvancedCEDebug::GetClosestPart(Editors::EditorRigblock* part)
 {
 	PropertyListPtr propList;
 

@@ -21,13 +21,13 @@ member_detour(Editor_EditHistoryDetour, Editors::cEditor, void(bool, Editors::Ed
 		{
 			for (EditorRigblockPtr part : Editor.GetEditorModel()->mRigblocks)
 			{
-				if (AdvancedCEDebug::PartCanReparent(part))
+				if (AdvancedCEDebug::PartCanReparent(part.get()))
 				{
 					if (editorControls->mpPrevParent) {
 						part->mpParent = editorControls->mpPrevParent;
 					}
 					else {
-						part->mpParent = AdvancedCEDebug::GetClosestPart(part);
+						part->mpParent = AdvancedCEDebug::GetClosestPart(part.get());
 					}
 					if (part->mBooleanAttributes[Editors::kEditorRigblockModelActsLikeGrasper] || part->mBooleanAttributes[Editors::kEditorRigblockModelActsLikeFoot])
 					{
