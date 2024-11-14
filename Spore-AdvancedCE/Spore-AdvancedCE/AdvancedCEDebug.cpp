@@ -71,9 +71,9 @@ EditorRigblockPtr AdvancedCEDebug::GetClosestPart(Editors::EditorRigblock* part)
 const char* AdvancedCEDebug::GetDescription(ArgScript::DescriptionMode mode) const
 {
 	if (mode == ArgScript::DescriptionMode::Basic) {
-		return "This cheat does something.";
+		return "Debug developer function for Advanced Creature Edit.";
 	}
 	else {
-		return "AdvancedCEDebug: Elaborate description of what this cheat does.";
+		return "AdvancedCEDebug: Debug developer function for Advanced Creature Edit.";
 	}
 }
