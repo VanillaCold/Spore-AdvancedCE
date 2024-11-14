@@ -43,7 +43,6 @@ cEditor* AdvCE_EditorControls::IsInEditor() const {
 }
 
 bool AdvCE_EditorControls::IsVehicleEditor() const {
-	//if (!IsInEditor()) { return false; }
 	auto editor = GetEditor();
 
 	switch (editor->mModelTypes[0]) {
@@ -64,6 +63,21 @@ bool AdvCE_EditorControls::IsVehicleEditor() const {
 			return true;
 			break;
 		default: return false;
+	}
+}
+
+bool AdvCE_EditorControls::IsBuildingEditor() const {
+	auto editor = GetEditor();
+
+	switch (editor->mModelTypes[0]) {
+	case kBuildingCityHall:
+	case kBuildingEntertainment:
+	case kBuildingIndustry:
+	case kBuildingHouse:
+	case kBuildingFarm:
+		return true;
+		break;
+	default: return false;
 	}
 }
 
@@ -89,6 +103,26 @@ void AdvCE_EditorControls::SetAdvCEManips(bool state) {
 	}
 }
 
+void AdvCE_EditorControls::SetSnapSuppressor(bool state) {
+	auto editor = GetEditor();
+	if (state) {
+		// programmatically suppress snapping on all rigblocks
+		if (editor->GetEditorModel()) {
+			for (auto rigblock : editor->GetEditorModel()->mRigblocks) {
+				rigblock->mModelSymmetrySnapDelta *= 0.001f;
+			}
+		}
+	}
+	else {
+		// programmatically re-enable snapping on all rigblocks
+		if (editor->GetEditorModel()) {
+			for (auto rigblock : editor->GetEditorModel()->mRigblocks) {
+				rigblock->mModelSymmetrySnapDelta /= 0.001f;
+			}
+		}
+	}
+}
+
 // exclude things that match this description, because they like to crash.
 bool AdvCE_EditorControls::IsRigblockChassis(EditorRigblockPtr part) const {
 	if (!part) { return false; }
@@ -103,6 +137,7 @@ int AdvCE_EditorControls::GetEventFlags() const
 bool AdvCE_EditorControls::HandleUIMessage(IWindow* window, const Message& message)
 {
 	cEditor* editor = IsInEditor();
+
 	// In the editor
 	if (editor) {
 
@@ -116,9 +151,10 @@ bool AdvCE_EditorControls::HandleUIMessage(IWindow* window, const Message& messa
 			}
 		}
 
-		// Allow Shift and Ctrl to use  Advanced CE movement,
-		// and Remap moving the entire vehicle to Shift+Ctrl.
-		if (IsVehicleEditor()) {
+		// Allow Shift and Ctrl to use Advanced CE movement,
+		// and remap moving the entire vehicle to Shift+Ctrl.
+		// Run on all editors except building editors, so that the snap suppressor always turns on.
+		if (!IsBuildingEditor()) {
 			// Pressed or Unpressed CTRL
 			if (message.Key.vkey == VK_CONTROL) {
 				if (message.IsType(kMsgKeyDown) && !mbCtrlHeld) {
@@ -144,10 +180,16 @@ bool AdvCE_EditorControls::HandleUIMessage(IWindow* window, const Message& messa
 				// Player is trying to move the entire vehicle.
 				// This has been remapped to ctrl + shift
 				if ((mbCtrlHeld && mbShiftHeld) || mbCtrlHeld == mbShiftHeld) {
-					SetAdvCEManips(false);
+					if (IsVehicleEditor()) {
+						SetAdvCEManips(false);
+					}
+					SetSnapSuppressor(false);
 				}
 				else {
-					SetAdvCEManips(true);
+					if (IsVehicleEditor()) {
+						SetAdvCEManips(true);
+					}
+					SetSnapSuppressor(true);
 				}
 			}
 

@@ -26,7 +26,9 @@ public:
 
 	cEditor* IsInEditor() const;
 	bool IsVehicleEditor() const;
+	bool IsBuildingEditor() const;
 	void SetAdvCEManips(bool state);
+	void SetSnapSuppressor(bool state);
 	bool IsRigblockChassis(EditorRigblockPtr par) const;
 
 	int GetEventFlags() const override;
