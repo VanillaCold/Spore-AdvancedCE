@@ -12,6 +12,8 @@ public:
 	// Called when the cheat is invoked
 	void ParseLine(const ArgScript::Line& line) override;
 
+	static bool AdvancedCEDebug::PartCanReparent(Editors::EditorRigblock* part);
+	static EditorRigblockPtr GetSymmetricPart(Editors::EditorRigblock* part);
 	static EditorRigblockPtr GetClosestPart(Editors::EditorRigblock* part);
 	
 	// Returns a string containing the description. If mode != DescriptionMode::Basic, return a more elaborated description

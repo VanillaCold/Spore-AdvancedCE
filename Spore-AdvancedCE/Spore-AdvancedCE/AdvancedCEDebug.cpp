@@ -43,6 +43,41 @@ void AdvancedCEDebug::ParseLine(const ArgScript::Line& line)
 	}*/
 }
 
+bool AdvancedCEDebug::PartCanReparent(Editors::EditorRigblock* part) {
+
+	if (!part->mBooleanAttributes[Editors::kEditorRigblockModelIsVertebra] && !part->mBooleanAttributes[Editors::kEditorRigblockModelUseSkin]
+		&& !part->mpParent) {
+		if (part->mBooleanAttributes[Editors::kEditorRigblockModelCanBeParentless]) {
+			return true;
+		}
+	}
+	return false;
+}
+
+
+
+EditorRigblockPtr AdvancedCEDebug::GetSymmetricPart(Editors::EditorRigblock* part)
+{
+	// Find the main rigblock index
+	auto& rigblocks = Editor.GetEditorModel()->mRigblocks;
+	auto it = eastl::find(rigblocks.begin(), rigblocks.end(), part);
+	if (it == rigblocks.end()) {
+		// Not found
+		return nullptr;
+	}
+	int rigblockIndex = eastl::distance(rigblocks.begin(), it);
+
+	// Use the rigblock index to get the symmetric block index and rigblock
+	if (Editor.GetSkin() && Editor.GetSkin()->GetMesh() && Editor.GetSkin()->GetMesh()->mpCreatureData) {
+		auto blockdata = Editor.GetSkin()->GetMesh()->mpCreatureData->mRigblocks[rigblockIndex];
+		auto rigblockSymmIndex = blockdata.mSymmetricIndex;
+
+		return rigblocks[rigblockSymmIndex];
+	}
+	
+	return nullptr;
+}
+
 EditorRigblockPtr AdvancedCEDebug::GetClosestPart(Editors::EditorRigblock* part)
 {
 	PropertyListPtr propList;
@@ -50,11 +85,11 @@ EditorRigblockPtr AdvancedCEDebug::GetClosestPart(Editors::EditorRigblock* part)
 	if (PropManager.GetPropertyList(id("ClosestPartParents"), id("AdvancedCE"), propList))
 	{
 		EditorRigblockPtr closest = Editor.GetEditorModel()->mRigblocks[0];
-		float closestDistance = 99999999999;
+		float closestDistance = 99999999999.0f;
 		Vector3 position = part->mPosition;
-		for each (EditorRigblockPtr part2 in Editor.GetEditorModel()->mRigblocks)
+		for (EditorRigblockPtr part2 : Editor.GetEditorModel()->mRigblocks)
 		{
-			float dist = (part2->mPosition - position).Length() / (part2->mModelScale);
+			float dist = Math::distance(part2->mPosition, position); // / (part2->mModelScale);
 			if (dist < closestDistance && part != part2.get() && part2->mpParent != part)
 			{
 				closest = part2;
@@ -71,9 +106,9 @@ EditorRigblockPtr AdvancedCEDebug::GetClosestPart(Editors::EditorRigblock* part)
 const char* AdvancedCEDebug::GetDescription(ArgScript::DescriptionMode mode) const
 {
 	if (mode == ArgScript::DescriptionMode::Basic) {
-		return "This cheat does something.";
+		return "Debug developer function for Advanced Creature Edit.";
 	}
 	else {
-		return "AdvancedCEDebug: Elaborate description of what this cheat does.";
+		return "AdvancedCEDebug: Debug developer function for Advanced Creature Edit.";
 	}
 }

@@ -2,30 +2,33 @@
 #include "stdafx.h"
 #include <Spore\Editors\EditorRigblock.h>
 #include "AdvancedCEDebug.h"
+#include "AdvCE_EditorControls.h"
+
+AdvCE_EditorControls* editorControls;
 
 void Initialize()
 {
-	// This method is executed when the game starts, before the user interface is shown
-	// Here you can do things such as:
-	//  - Add new cheats
-	//  - Add new simulator classes
-	//  - Add new game modes
-	//  - Add new space tools
-	//  - Change materials
 	CheatManager.AddCheat("AdvCEDebug", new AdvancedCEDebug());
-	//Editor.CommitEditHistory()
+	editorControls = new(AdvCE_EditorControls);
 }
 
+// If part loses its parent, apply the previous parent, or find the next closest part to attach to.
+// TODO: symmetry.
 member_detour(Editor_EditHistoryDetour, Editors::cEditor, void(bool, Editors::EditorStateEditHistory*)) {
-	void detoured(bool arg1, Editors::EditorStateEditHistory * pStateHistory){
+	void detoured(bool arg1, Editors::EditorStateEditHistory* pStateHistory){
 		auto it = eastl::find(this->mEnabledManipulators.begin(), this->mEnabledManipulators.end(), id("cEditorManipulator_AdvancedCE"));
 		if (this->IsMode(Editors::Mode::BuildMode) && it != this->mEnabledManipulators.end())
 		{
-			for each (EditorRigblockPtr part in Editor.GetEditorModel()->mRigblocks)
+			for (EditorRigblockPtr part : Editor.GetEditorModel()->mRigblocks)
 			{
-				if (!part->mBooleanAttributes[Editors::kEditorRigblockModelIsVertebra] && !part->mBooleanAttributes[Editors::kEditorRigblockModelUseSkin] && !part->mpParent)
+				if (AdvancedCEDebug::PartCanReparent(part.get()))
 				{
-					part->mpParent = AdvancedCEDebug::GetClosestPart(part.get());//Editor.GetEditorModel()->mRigblocks[0];
+					if (editorControls->mpPrevParent) {
+						part->mpParent = editorControls->mpPrevParent;
+					}
+					else {
+						part->mpParent = AdvancedCEDebug::GetClosestPart(part.get());
+					}
 					if (part->mBooleanAttributes[Editors::kEditorRigblockModelActsLikeGrasper] || part->mBooleanAttributes[Editors::kEditorRigblockModelActsLikeFoot])
 					{
 						HintManager.ShowHint(id("advce-corruptlimb"));
@@ -39,14 +42,12 @@ member_detour(Editor_EditHistoryDetour, Editors::cEditor, void(bool, Editors::Ed
 
 void Dispose()
 {
-	// This method is called when the game is closing
+	editorControls = nullptr;
 }
 
 void AttachDetours()
 {
 	Editor_EditHistoryDetour::attach(GetAddress(Editors::cEditor, CommitEditHistory));
-	// Call the attach() method on any detours you want to add
-	// For example: cViewer_SetRenderType_detour::attach(GetAddress(cViewer, SetRenderType));
 }
 
 

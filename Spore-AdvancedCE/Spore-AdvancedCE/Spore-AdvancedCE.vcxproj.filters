@@ -22,6 +22,9 @@
     <ClInclude Include="AdvancedCEDebug.h">
       <Filter>Spore-AdvancedCE</Filter>
     </ClInclude>
+    <ClInclude Include="AdvCE_EditorControls.h">
+      <Filter>Spore-AdvancedCE</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="dllmain.cpp">
@@ -31,6 +34,9 @@
       <Filter>Internal</Filter>
     </ClCompile>
     <ClCompile Include="AdvancedCEDebug.cpp">
+      <Filter>Spore-AdvancedCE</Filter>
+    </ClCompile>
+    <ClCompile Include="AdvCE_EditorControls.cpp">
       <Filter>Spore-AdvancedCE</Filter>
     </ClCompile>
   </ItemGroup>
