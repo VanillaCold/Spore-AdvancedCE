@@ -1,0 +1,7 @@
+string8s postinitList
+	"TemplateRigblock AdvCEKey"
+	"MaskTemplate AdvCEKey"
+end
+key 0x0C2532F3 TribalAccessoriesEditorTemplates!TribalAccessoryMaskTemplate
+key 0x963B5352 CreatureEditorTemplates!creatureRigblockTemplate
+key 0xB7FA48C5 AdvancedCE!RigblockOverride
