@@ -1,5 +1,5 @@
 keys editorEnabledManipulators
-	0x6125EE88
+	cSPEditorManipulationInterpenetration
 	cSPEditorManipulationLimb
 	cSPEditorManipulationBoneRotation
 	cSPEditorManipulationPinning

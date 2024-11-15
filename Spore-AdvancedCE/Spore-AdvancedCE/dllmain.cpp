@@ -12,30 +12,34 @@ void Initialize()
 	editorControls = new(AdvCE_EditorControls);
 }
 
+void ReparentParts(Editors::cEditor* editor) {
+	auto it = eastl::find(editor->mEnabledManipulators.begin(), editor->mEnabledManipulators.end(), id("cEditorManipulator_AdvancedCE"));
+	if (editor->IsMode(Editors::Mode::BuildMode) && it != editor->mEnabledManipulators.end())
+	{
+		for (EditorRigblockPtr part : Editor.GetEditorModel()->mRigblocks)
+		{
+			if (AdvancedCEDebug::PartCanReparent(part.get()))
+			{
+				if (editorControls->mpPrevParent) {
+					part->mpParent = editorControls->mpPrevParent;
+				}
+				else {
+					part->mpParent = AdvancedCEDebug::GetClosestPart(part.get());
+				}
+				if (part->mBooleanAttributes[Editors::kEditorRigblockModelActsLikeGrasper] || part->mBooleanAttributes[Editors::kEditorRigblockModelActsLikeFoot])
+				{
+					HintManager.ShowHint(id("advce-corruptlimb"));
+				}
+			}
+		}
+	}
+}
+
 // If part loses its parent, apply the previous parent, or find the next closest part to attach to.
 // TODO: symmetry.
 member_detour(Editor_EditHistoryDetour, Editors::cEditor, void(bool, Editors::EditorStateEditHistory*)) {
 	void detoured(bool arg1, Editors::EditorStateEditHistory* pStateHistory){
-		auto it = eastl::find(this->mEnabledManipulators.begin(), this->mEnabledManipulators.end(), id("cEditorManipulator_AdvancedCE"));
-		if (this->IsMode(Editors::Mode::BuildMode) && it != this->mEnabledManipulators.end())
-		{
-			for (EditorRigblockPtr part : Editor.GetEditorModel()->mRigblocks)
-			{
-				if (AdvancedCEDebug::PartCanReparent(part.get()))
-				{
-					if (editorControls->mpPrevParent) {
-						part->mpParent = editorControls->mpPrevParent;
-					}
-					else {
-						part->mpParent = AdvancedCEDebug::GetClosestPart(part.get());
-					}
-					if (part->mBooleanAttributes[Editors::kEditorRigblockModelActsLikeGrasper] || part->mBooleanAttributes[Editors::kEditorRigblockModelActsLikeFoot])
-					{
-						HintManager.ShowHint(id("advce-corruptlimb"));
-					}
-				}
-			}
-		}
+		ReparentParts(this);
 		original_function(this, arg1, pStateHistory);
 	}
 };

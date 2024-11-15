@@ -5,8 +5,43 @@ string8s postinitList
 	"CreatureKey AdvCEKey"
 	"TribalSetupKey AdvCETribalKey"
 	"TribalCSAKey AdvCETribalKey"
+	"CellSetupKey AdvCECellKey"
+	"CERigblockTemplateKey AdvCERigblockKey"
+	"CLRigblockTemplateKey AdvCERigblockKey"
+	
+	"BLDRigblockConnectorKey AdvCERigblockBoundlessKey"
+	"BLDRigblockDetailKey AdvCERigblockBoundlessKey"
+	"BLDRigblockFloorKey AdvCERigblockBoundlessKey"
+	"BLDRigblockStructureKey AdvCERigblockBoundlessKey"
+	
+	"VCLRigblockChassisKey AdvCERigblockBoundlessKey"
+	"VCLRigblockCockpitKey AdvCERigblockBoundlessKey"
+	"VCLRigblockRigblockKey AdvCERigblockBoundlessKey"
+	
 end
+
+# References
 key CreatureKey editor_setup~!CreatureEditorSetup
 key TribalSetupKey editor_setup~!TribalAccessoriesEditorSetup
+key CellSetupKey editor_setup~!CellTemplate
+key CERigblockTemplateKey CreatureEditorTemplates!creatureRigblockTemplate
+key CLRigblockTemplateKey CellEditorTemplates!CellRigblockTemplate
+
+key BLDRigblockConnectorKey BuildingEditorTemplates!BuildingConnectorTemplate
+key BLDRigblockDetailKey BuildingEditorTemplates!BuildingDetailTemplate
+key BLDRigblockFloorKey BuildingEditorTemplates!BuildingFloorTemplate
+key BLDRigblockRoofKey BuildingEditorTemplates!BuildingRoofTemplate
+key BLDRigblockStructureKey BuildingEditorTemplates!BuildingStructureTemplate
+
+key VCLRigblockChassisKey VehicleEditorTemplates!VehicleChassisTemplate
+key VCLRigblockCockpitKey VehicleEditorTemplates!VehicleCockpitTemplate
+key VCLRigblockRigblockKey VehicleEditorTemplates!VehicleRigblockTemplate
+
+# Postinits
 key AdvCEKey AdvancedCE!CEManipulators
 key AdvCETribalKey AdvancedCE!TEManipulators
+key AdvCECellKey AdvancedCE!CLManipulators
+key AdvCERigblockKey AdvancedCE!TEManipulators
+key AdvCERigblockBoundlessKey AdvancedCE!TEManipulators
+
+

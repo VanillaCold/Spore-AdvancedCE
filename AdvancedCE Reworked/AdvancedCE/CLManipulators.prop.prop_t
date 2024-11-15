@@ -1,0 +1,11 @@
+keys editorEnabledManipulators
+	cSPEditorManipulationStacking
+
+	cSPEditorManipulationInterpenetration
+	cSPEditorManipulationCellPinning
+	cSPEditorManipulationCellTorso
+	cSPEditorManipulationDeformHandle
+	cSPEditorManipulationRotationHandle
+	cSPEditorManipulationSpineScaling
+	cEditorManipulator_AdvancedCE
+end
