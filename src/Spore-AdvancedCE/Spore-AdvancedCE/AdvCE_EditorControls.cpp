@@ -44,41 +44,16 @@ cEditor* AdvCE_EditorControls::IsInEditor() const {
 
 bool AdvCE_EditorControls::IsVehicleEditor() const {
 	auto editor = GetEditor();
-
-	switch (editor->mModelTypes[0]) {
-		case kVehicleHarvester:
-		case kVehicleMilitaryLand:
-		case kVehicleMilitaryWater:
-		case kVehicleMilitaryAir:
-		case kVehicleCulturalLand:
-		case kVehicleCulturalWater:
-		case kVehicleCulturalAir:
-		case kVehicleEconomicLand:
-		case kVehicleEconomicWater:
-		case kVehicleEconomicAir:
-		case kVehicleColonyLand:
-		case kVehicleColonyWater:
-		case kVehicleColonyAir:
-		case kVehicleUFO:
-			return true;
-			break;
-		default: return false;
-	}
+	if ((editor->mSaveExtension == TypeIDs::vcl) || (editor->mSaveExtension == TypeIDs::ufo))
+		return true;
+	return false;
 }
 
 bool AdvCE_EditorControls::IsBuildingEditor() const {
 	auto editor = GetEditor();
-
-	switch (editor->mModelTypes[0]) {
-	case kBuildingCityHall:
-	case kBuildingEntertainment:
-	case kBuildingIndustry:
-	case kBuildingHouse:
-	case kBuildingFarm:
+	if (editor->mSaveExtension == TypeIDs::bld)
 		return true;
-		break;
-	default: return false;
-	}
+	return false;
 }
 
 void AdvCE_EditorControls::SetAdvCEManips(bool state) {

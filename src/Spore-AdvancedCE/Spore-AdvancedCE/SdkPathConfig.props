@@ -2,8 +2,8 @@
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ImportGroup Label="PropertySheets" />
   <PropertyGroup Label="UserMacros">
-    <SporeSdkPath>C:\Program Files (x86)\SporeModder FX\Spore ModAPI\</SporeSdkPath>
-	<SporeLauncherPath>C:\ProgramData\SporeModManagerStorage\</SporeLauncherPath>
+	  <SporeSdkPath>C:\Program Files (x86)\SporeModder FX\Spore ModAPI\</SporeSdkPath>
+	  <SporeLauncherPath>\\host.lan\Data\.wine\drive_c\GOG Games\SPORE\SporeModLoader\</SporeLauncherPath>
   </PropertyGroup>
   <PropertyGroup />
   <ItemDefinitionGroup />
