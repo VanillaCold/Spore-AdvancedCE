@@ -10,13 +10,11 @@
 	<remove game="GalacticAdventures">Chocice75_AdvCE-EvoOutfitter.package</remove>
 
 	<prerequisite game="GalacticAdventures">VanillaCold_AdvCE-PartParenting.package</prerequisite>
-	<prerequisite game="GalacticAdventures">VanilaCold_AdvCE.package</prerequisite>
+	<prerequisite game="GalacticAdventures">VanillaCold_AdvCE.package</prerequisite>
 	<componentGroup unique="SnapSuppress" displayName="Suppress Snapping">
-    	<component unique="NoSnap" displayName="Suppress Snapping" description="Dramatically decreases the distance from the center required before parts snap to the center of the creature, making the snapping less annoying." game="GalacticAdventures" defaultChecked="true">VanillaCold_AdvCE-NoSnap.package</component>
+    	<component unique="NoSnap" displayName="Suppress Snapping" description="Dramatically decreases the distance from the center required before parts snap to the center of the creature, making the snapping less annoying." game="GalacticAdventures" defaultChecked="false">VanillaCold_AdvCE-NoSnap.package</component>
     	<component unique="LessSnap" displayName="Reduce Snapping" description="Slightly decreases the distance from the center required before parts snap to the center of the creature, making the snapping less annoying." game="GalacticAdventures" defaultChecked="true">VanillaCold_AdvCE-LessSnap.package</component>
 		<component unique="AllSnap" displayName="Vanilla" description="Keeps the snapping behaviour from the vanilla game; parts will snap to each other when slightly close to the centre of the creature." game="GalacticAdventures" defaultChecked="false"></component>
-	<component unique="LessSnap" displayName="Reduce Snapping" description="Slightly decreases the distance from the center required before parts snap to the center of the creature, making the snapping less annoying." game="GalacticAdventures" defaultChecked="true">VanillaCold_AdvCE-LessSnap.package</component>
-<component unique="LessSnap" displayName="Reduce Snapping" description="Slightly decreases the distance from the center required before parts snap to the center of the creature, making the snapping less annoying." game="GalacticAdventures" defaultChecked="true">VanillaCold_AdvCE-LessSnap.package</component>
 	</componentGroup>
 	<component unique="EvoOutfitter" displayName="Evo-Outfitter" description="Adds parts from the Creature Editor into all outfitters. Will also affect the budget available in the outfitters." game="GalacticAdventures" defaultChecked="false">VanillaCold_AdvCE-EvoOutfitter.package</component>
 </mod>
