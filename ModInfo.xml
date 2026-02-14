@@ -1,15 +1,24 @@
-<mod displayName="Advanced CE" unique="AdvancedCEChocIce75" description="Advanced CE adds the building editor's part clipping to the creature editor and outfitters, among some other smaller features." installerSystemVersion="1.0.1.1" hasCustomInstaller="true" dllsBuild="2.5.20">
+<mod displayName="Advanced CE" unique="AdvancedCEChocIce75" description="Advanced CE adds the building editor's part clipping to the creature editor and outfitters, among some other smaller features." installerSystemVersion="1.0.1.1" hasCustomInstaller="true" dllsBuild="2.5.555">
 	<remove game="GalacticAdventures">!!!!!!!!!!!AdvancedCE.package</remove>
 	<remove game="GalacticAdventures">!!!!!!!!!!!AdvancedCE_Vanilla.package</remove>
 	<remove game="GalacticAdventures">!!!!!!!!!!!AdvancedCE-GM.package</remove>
 	<remove game="GalacticAdventures">!!!!!!!!!!!AdvancedCE_Vanilla-GM.package</remove>
 
-	<prerequisite game="GalacticAdventures">Chocice75_AdvCE.package</prerequisite>
+	<remove game="GalacticAdventures">Chocice75_AdvCE.package</remove>
+	<remove game="GalacticAdventures">Chocice75_AdvCE_NoSnap.package</remove>
+	<remove game="GalacticAdventures">Chocice75_AdvCE_LessSnap.package</remove>
+	<remove game="GalacticAdventures">Chocice75_AdvCE-EvoOutfitter.package</remove>
+
+	<prerequisite game="GalacticAdventures">VanillaCold_AdvCE-PartParenting.package</prerequisite>
+	<prerequisite game="GalacticAdventures">VanilaCold_AdvCE.package</prerequisite>
 	<componentGroup unique="SnapSuppress" displayName="Suppress Snapping">
-    	<component unique="NoSnap" displayName="Suppress Snapping" description="Dramatically decreases the distance from the center required before parts snap to the center of the creature, making the snapping less annoying." game="GalacticAdventures" defaultChecked="true">Chocice75_AdvCE_NoSnap.package</component>
-    	<component unique="LessSnap" displayName="Reduce Snapping" description="Slightly decreases the distance from the center required before parts snap to the center of the creature, making the snapping less annoying." game="GalacticAdventures" defaultChecked="true">Chocice75_AdvCE_LessSnap.package</component>
+    	<component unique="NoSnap" displayName="Suppress Snapping" description="Dramatically decreases the distance from the center required before parts snap to the center of the creature, making the snapping less annoying." game="GalacticAdventures" defaultChecked="true">VanillaCold_AdvCE-NoSnap.package</component>
+    	<component unique="LessSnap" displayName="Reduce Snapping" description="Slightly decreases the distance from the center required before parts snap to the center of the creature, making the snapping less annoying." game="GalacticAdventures" defaultChecked="true">VanillaCold_AdvCE-LessSnap.package</component>
+		<component unique="AllSnap" displayName="Vanilla" description="Keeps the snapping behaviour from the vanilla game; parts will snap to each other when slightly close to the centre of the creature." game="GalacticAdventures" defaultChecked="false"></component>
+	<component unique="LessSnap" displayName="Reduce Snapping" description="Slightly decreases the distance from the center required before parts snap to the center of the creature, making the snapping less annoying." game="GalacticAdventures" defaultChecked="true">VanillaCold_AdvCE-LessSnap.package</component>
+<component unique="LessSnap" displayName="Reduce Snapping" description="Slightly decreases the distance from the center required before parts snap to the center of the creature, making the snapping less annoying." game="GalacticAdventures" defaultChecked="true">VanillaCold_AdvCE-LessSnap.package</component>
 	</componentGroup>
-	<component unique="EvoOutfitter" displayName="Evo-Outfitter" description="Adds parts from the Creature Editor into all outfitters." game="GalacticAdventures" defaultChecked="true">Chocice75_AdvCE-EvoOutfitter.package</component>
+	<component unique="EvoOutfitter" displayName="Evo-Outfitter" description="Adds parts from the Creature Editor into all outfitters. Will also affect the budget available in the outfitters." game="GalacticAdventures" defaultChecked="false">VanillaCold_AdvCE-EvoOutfitter.package</component>
 </mod>
 
 	
