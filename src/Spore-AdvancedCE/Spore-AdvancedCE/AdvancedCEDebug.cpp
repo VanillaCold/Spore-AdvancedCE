@@ -47,7 +47,7 @@ bool AdvancedCEDebug::PartCanReparent(Editors::EditorRigblock* part) {
 
 	if (!part->mBooleanAttributes[Editors::kEditorRigblockModelIsVertebra] && !part->mBooleanAttributes[Editors::kEditorRigblockModelUseSkin]
 		&& !part->mpParent) {
-		if (part->mBooleanAttributes[Editors::kEditorRigblockModelCanBeParentless]) {
+		if (part->mBooleanAttributes[Editors::kEditorRigblockModelCannotBeParentless]) {
 			return true;
 		}
 	}
@@ -72,7 +72,9 @@ EditorRigblockPtr AdvancedCEDebug::GetSymmetricPart(Editors::EditorRigblock* par
 		auto blockdata = Editor.GetSkin()->GetMesh()->mpCreatureData->mRigblocks[rigblockIndex];
 		auto rigblockSymmIndex = blockdata.mSymmetricIndex;
 
-		return rigblocks[rigblockSymmIndex];
+		if (rigblocks[rigblockSymmIndex]) {
+			return rigblocks[rigblockSymmIndex];
+		}
 	}
 	
 	return nullptr;
@@ -100,7 +102,12 @@ EditorRigblockPtr AdvancedCEDebug::GetClosestPart(Editors::EditorRigblock* part)
 		part->field_138 = closest->mPosition - position;
 		return closest;
 	}
-	return Editor.GetEditorModel()->mRigblocks[0];
+	if (Editor.GetEditorModel()->mRigblocks[0] != part) {
+		return Editor.GetEditorModel()->mRigblocks[0];
+	}
+	else {
+		return nullptr;
+	}
 }
 
 const char* AdvancedCEDebug::GetDescription(ArgScript::DescriptionMode mode) const

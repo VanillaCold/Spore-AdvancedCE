@@ -6,8 +6,8 @@ string8s postinitList
 	"TribalSetupKey AdvCETribalKey"
 	"TribalCSAKey AdvCETribalKey"
 	"CellSetupKey AdvCECellKey"
-	"CERigblockTemplateKey AdvCERigblockKey"
-	"CLRigblockTemplateKey AdvCERigblockKey"
+	#"CERigblockTemplateKey AdvCERigblockKey"
+	#"CLRigblockTemplateKey AdvCERigblockKey"
 	
 	"BLDRigblockConnectorKey AdvCERigblockBoundlessKey"
 	"BLDRigblockDetailKey AdvCERigblockBoundlessKey"
