@@ -30,6 +30,10 @@ void ReparentParts(Editors::cEditor* editor) {
 				{
 					HintManager.ShowHint(id("advce-corruptlimb"));
 				}
+				if (part->mpParent == part)
+				{
+					part->mpParent = nullptr;
+				}
 			}
 		}
 	}

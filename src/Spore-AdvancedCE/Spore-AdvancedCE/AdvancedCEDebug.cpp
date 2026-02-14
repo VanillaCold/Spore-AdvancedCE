@@ -83,10 +83,10 @@ EditorRigblockPtr AdvancedCEDebug::GetSymmetricPart(Editors::EditorRigblock* par
 EditorRigblockPtr AdvancedCEDebug::GetClosestPart(Editors::EditorRigblock* part)
 {
 	PropertyListPtr propList;
+	EditorRigblockPtr closest = Editor.GetEditorModel()->mRigblocks[0];
 
 	if (PropManager.GetPropertyList(id("ClosestPartParents"), id("AdvancedCE"), propList))
 	{
-		EditorRigblockPtr closest = Editor.GetEditorModel()->mRigblocks[0];
 		float closestDistance = 99999999999.0f;
 		Vector3 position = part->mPosition;
 		for (EditorRigblockPtr part2 : Editor.GetEditorModel()->mRigblocks)
@@ -100,10 +100,9 @@ EditorRigblockPtr AdvancedCEDebug::GetClosestPart(Editors::EditorRigblock* part)
 
 		}
 		part->field_138 = closest->mPosition - position;
-		return closest;
 	}
 	if (Editor.GetEditorModel()->mRigblocks[0] != part) {
-		return Editor.GetEditorModel()->mRigblocks[0];
+		return closest;
 	}
 	else {
 		return nullptr;

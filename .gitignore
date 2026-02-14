@@ -1,3 +1,5 @@
 */.vs
+.vs/
 Debug/
-Release/
+Rel
+/.vs
