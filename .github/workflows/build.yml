@@ -104,6 +104,7 @@ jobs:
           fileName: ${{ env.SPORE_MODDER_FX_FILE }}
           tarBall: false
           zipBall: false
+          tag: v2.2.24
           out-file-path: ''
           extract: true
       - run: mkdir -p Packages
