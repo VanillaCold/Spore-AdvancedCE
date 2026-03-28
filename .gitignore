@@ -1,5 +1,9 @@
 */.vs
-.vs/
+.vs/*
+*/.vs/*
 Debug/
 Rel
-/.vs
+/.vs*
+*/.kdev4
+*.kdev4
+vs

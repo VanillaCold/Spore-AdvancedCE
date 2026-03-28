@@ -1,6 +1,6 @@
 #pragma once
 
-#include <Spore\BasicIncludes.h>
+#include <Spore/BasicIncludes.h>
 
 #define AdvCE_EditorControlsPtr intrusive_ptr<AdvCE_EditorControls>
 

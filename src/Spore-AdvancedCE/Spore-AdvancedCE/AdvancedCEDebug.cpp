@@ -99,7 +99,7 @@ EditorRigblockPtr AdvancedCEDebug::GetClosestPart(Editors::EditorRigblock* part)
 			}
 
 		}
-		part->field_138 = closest->mPosition - position;
+		part->mSurfaceNormal = closest->mPosition - position;
 	}
 	if (Editor.GetEditorModel()->mRigblocks[0] != part) {
 		return closest;

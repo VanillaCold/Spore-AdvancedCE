@@ -1,6 +1,6 @@
 // dllmain.cpp : Defines the entry point for the DLL application.
 #include "stdafx.h"
-#include <Spore\Editors\EditorRigblock.h>
+#include <Spore/Editors/EditorRigblock.h>
 #include "AdvancedCEDebug.h"
 #include "AdvCE_EditorControls.h"
 

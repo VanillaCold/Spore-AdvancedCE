@@ -1,5 +1,6 @@
 #include "stdafx.h"
 #include "AdvCE_EditorControls.h"
+#include <Spore/BasicIncludes.h>
 
 AdvCE_EditorControls::AdvCE_EditorControls()
 {
