@@ -13,7 +13,7 @@
   <PropertyGroup Label="Globals">
     <ProjectGuid>{07FC5B61-B575-4207-B464-AFAE6AF3FC19}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
-    <RootNamespace>Spore_AdvancedCE</RootNamespace>
+    <RootNamespace>Spore-AdvancedCE</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -98,26 +98,14 @@
     <Text Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="AdvancedCEDebug.h">
-      <SubType>
-      </SubType>
-    </ClInclude>
-    <ClInclude Include="AdvCE_EditorControls.h">
-      <SubType>
-      </SubType>
-    </ClInclude>
+<ClInclude Include="./AdvCE_EditorControls.h"/>
+<ClInclude Include="./AdvancedCEDebug.h"/>
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="AdvancedCEDebug.cpp">
-      <SubType>
-      </SubType>
-    </ClCompile>
-    <ClCompile Include="AdvCE_EditorControls.cpp">
-      <SubType>
-      </SubType>
-    </ClCompile>
+<ClCompile Include="./AdvCE_EditorControls.cpp"/>
+<ClCompile Include="./AdvancedCEDebug.cpp"/>
     <ClCompile Include="dllmain.cpp">
       <CompileAsManaged Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</CompileAsManaged>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
