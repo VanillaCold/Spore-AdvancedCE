@@ -43,6 +43,16 @@ def MakeVcxproj(name: str, headers: list, codefiles: list):
     fileHandle.write(text)
     fileHandle.close()
 
+def MakeSln(name: str):
+    fileHandle = open("./.projectTemplate/slnTemplate.xml", "r")
+    text = fileHandle.read()
+    fileHandle.close();
+
+    text = text.replace("====PROJECT_NAME====", name)
+    fileHandle = open("../"+name+".sln", "w")
+    fileHandle.write(text)
+    fileHandle.close()
+
 
 files = SearchForFiles();
 name = os.getcwd().split(os.sep)[-1];
@@ -56,3 +66,4 @@ codes = list(filter(cppr.match, files));
 print(headers, codes)
 
 MakeVcxproj(name, headers, codes)
+MakeSln(name)
